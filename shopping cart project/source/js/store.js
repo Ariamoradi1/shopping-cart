@@ -15,7 +15,7 @@ const bastekProductsContainer = $.querySelector('.cart-items')
 const removeAllProductsBtn = $.querySelector('#remove-all-products')
 const cartTotalPriceElem = $.querySelector('.cart-total-price')
 
-allProducts.forEach(function (product) {
+allProducts.forEach( (product) => {
     let productContainer = $.createElement('div')
     productContainer.classList.add('shop-item')
 
@@ -37,7 +37,7 @@ allProducts.forEach(function (product) {
     let prodcutAddButton = $.createElement('button')
     prodcutAddButton.innerHTML = 'ADD TO CART'
     prodcutAddButton.className = 'btn btn-primary shop-item-button'
-    prodcutAddButton.addEventListener('click', function () {
+    prodcutAddButton.addEventListener('click', () => {
         addProductToBasketArray(product.id)
     })
 
@@ -49,7 +49,7 @@ allProducts.forEach(function (product) {
 
 
 
-function addProductToBasketArray (productId) {
+addProductToBasketArray = (productId) => {
 
     let mainProduct = allProducts.find(function (product) {
         return product.id === productId
@@ -63,10 +63,10 @@ function addProductToBasketArray (productId) {
     console.log(userBasket);
 }
 
-function basketProductsGenerator (userBasketArray) {
+basketProductsGenerator = (userBasketArray) => {
     bastekProductsContainer.innerHTML = ''
 
-    userBasketArray.forEach (function (product) {
+    userBasketArray.forEach ( (product) => {
 
         let basketProductContainer = $.createElement('div')
         basketProductContainer.classList.add('cart-row')
@@ -97,14 +97,14 @@ function basketProductsGenerator (userBasketArray) {
         basketProductInput.className = 'cart-quantity-input'
         basketProductInput.value = product.count
         basketProductInput.setAttribute('type', 'number')
-        basketProductInput.addEventListener('change', function () {
+        basketProductInput.addEventListener('change', () => {
             updateProductCount(product.id, basketProductInput.value)
         })
 
         let basketProductRemoveBtn = $.createElement('button')
         basketProductRemoveBtn.className = 'btn btn-danger'
         basketProductRemoveBtn.innerHTML = 'Remove'
-        basketProductRemoveBtn.addEventListener('click', function () {
+        basketProductRemoveBtn.addEventListener('click', () => {
             removeProductFromBasket(product.id)
         })
 
@@ -117,34 +117,34 @@ function basketProductsGenerator (userBasketArray) {
     })
 }
 
-function removeProductFromBasket (productId) {
+removeProductFromBasket = (productId) => {
 
-    userBasket = userBasket.filter (function (product) {
+    userBasket = userBasket.filter ( (product) => {
         return product.id !== productId
     })
 
     basketProductsGenerator(userBasket)
 }
 
-removeAllProductsBtn.addEventListener('click', function () {
+removeAllProductsBtn.addEventListener('click', () => {
     userBasket = []
     basketProductsGenerator(userBasket)
 })
 
-function calcTotalPrice (userBasketArray) {
+calcTotalPrice = (userBasketArray) => {
     let totalPriceValue = 0
 
-    userBasketArray.forEach(function (product) {
+    userBasketArray.forEach( (product) => {
         totalPriceValue += product.count * product.price
     })
 
     cartTotalPriceElem.innerHTML = totalPriceValue
 }
 
-function updateProductCount (productId, newCount) {
+updateProductCount = (productId, newCount) => {
     console.log("product id: " + productId + ' new count: ' + newCount);
 
-    userBasket.forEach(function (product) {
+    userBasket.forEach( (product) => {
         if (product.id === productId) {
             product.count = newCount
         }
